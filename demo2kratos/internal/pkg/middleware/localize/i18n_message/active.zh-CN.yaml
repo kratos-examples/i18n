@@ -1,0 +1,3 @@
+greeting: "你好，{{.Name}}"
+welcome: "欢迎使用我们的服务，{{.User}}！"
+errorMsg: "操作失败：{{.ErrorMessage}}"

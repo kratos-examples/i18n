@@ -1,0 +1,3 @@
+greeting: "Hello, {{.Name}}"
+welcome: "Welcome to our service, {{.User}}!"
+errorMsg: "Operation failed: {{.ErrorMessage}}"

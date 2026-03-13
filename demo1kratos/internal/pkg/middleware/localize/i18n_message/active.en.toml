@@ -1,0 +1,11 @@
+[greeting]
+description = "A greeting message with the user's name"
+other = "Hello, {{.Name}}"
+
+[welcome]
+description = "A welcome message for users accessing the service"
+other = "Welcome to our service, {{.User}}!"
+
+[errorMsg]
+description = "A generic error message for failed operations"
+other = "Operation failed: {{.ErrorMessage}}"

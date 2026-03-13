@@ -5,6 +5,8 @@ import (
 
 	pb "github.com/yylego/kratos-examples/demo1kratos/api/student"
 	"github.com/yylego/kratos-examples/demo1kratos/internal/biz"
+	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize"
+	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize/i18n_message"
 )
 
 type StudentService struct {
@@ -22,7 +24,12 @@ func (s *StudentService) CreateStudent(ctx context.Context, req *pb.CreateStuden
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	return &pb.CreateStudentReply{Student: &pb.StudentInfo{Id: v.ID, Name: v.Name, Age: v.Age, ClassName: v.ClassName}}, nil
+
+	message := localize.FromContext(ctx).MustLocalize(i18n_message.I18nGreeting(&i18n_message.GreetingParam{
+		Name: v.Name,
+	}))
+
+	return &pb.CreateStudentReply{Student: &pb.StudentInfo{Id: v.ID, Name: message, Age: v.Age, ClassName: v.ClassName}}, nil
 }
 
 func (s *StudentService) UpdateStudent(ctx context.Context, req *pb.UpdateStudentRequest) (*pb.UpdateStudentReply, error) {

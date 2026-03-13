@@ -5,6 +5,8 @@ import (
 
 	pb "github.com/yylego/kratos-examples/demo2kratos/api/article"
 	"github.com/yylego/kratos-examples/demo2kratos/internal/biz"
+	"github.com/yylego/kratos-examples/demo2kratos/internal/pkg/middleware/localize"
+	"github.com/yylego/kratos-examples/demo2kratos/internal/pkg/middleware/localize/i18n_message"
 )
 
 type ArticleService struct {
@@ -22,7 +24,12 @@ func (s *ArticleService) CreateArticle(ctx context.Context, req *pb.CreateArticl
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	return &pb.CreateArticleReply{Article: &pb.ArticleInfo{Id: v.ID, Title: v.Title, Content: v.Content, StudentId: v.StudentID}}, nil
+
+	message := localize.FromContext(ctx).Localize(i18n_message.I18nGreeting(&i18n_message.GreetingParam{
+		Name: v.Title,
+	}))
+
+	return &pb.CreateArticleReply{Article: &pb.ArticleInfo{Id: v.ID, Title: message, Content: v.Content, StudentId: v.StudentID}}, nil
 }
 
 func (s *ArticleService) UpdateArticle(ctx context.Context, req *pb.UpdateArticleRequest) (*pb.UpdateArticleReply, error) {

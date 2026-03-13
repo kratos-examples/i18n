@@ -1,0 +1,11 @@
+[greeting]
+description = "A greeting message with the user's name"
+other = "你好，{{.Name}}"
+
+[welcome]
+description = "A welcome message for users accessing the service"
+other = "欢迎使用我们的服务，{{.User}}！"
+
+[errorMsg]
+description = "A generic error message for failed operations"
+other = "操作失败：{{.ErrorMessage}}"

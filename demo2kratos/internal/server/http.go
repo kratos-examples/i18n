@@ -6,6 +6,7 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/http"
 	pb "github.com/yylego/kratos-examples/demo2kratos/api/article"
 	"github.com/yylego/kratos-examples/demo2kratos/internal/conf"
+	"github.com/yylego/kratos-examples/demo2kratos/internal/pkg/middleware/localize"
 	"github.com/yylego/kratos-examples/demo2kratos/internal/service"
 )
 
@@ -13,6 +14,7 @@ func NewHTTPServer(c *conf.Server, article *service.ArticleService, logger log.L
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			localize.I18N(),
 		),
 	}
 	if c.Http.Network != "" {
