@@ -2,9 +2,9 @@ package biz
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/brianvoe/gofakeit/v7"
-	"github.com/go-kratos/kratos/v2/log"
 	"github.com/yylego/kratos-ebz/ebzkratos"
 	pb "github.com/yylego/kratos-examples/demo2kratos/api/article"
 	"github.com/yylego/kratos-examples/demo2kratos/internal/data"
@@ -20,11 +20,11 @@ type Article struct {
 
 type ArticleUsecase struct {
 	data *data.Data
-	log  *log.Helper
+	slog *slog.Logger
 }
 
-func NewArticleUsecase(data *data.Data, logger log.Logger) *ArticleUsecase {
-	return &ArticleUsecase{data: data, log: log.NewHelper(logger)}
+func NewArticleUsecase(data *data.Data, logger *slog.Logger) *ArticleUsecase {
+	return &ArticleUsecase{data: data, slog: logger}
 }
 
 func (uc *ArticleUsecase) CreateArticle(ctx context.Context, a *Article) (*Article, *ebzkratos.Ebz) {

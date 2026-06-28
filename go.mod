@@ -7,7 +7,7 @@ require (
 	github.com/yylego/kratos-examples/demo1kratos v0.0.3
 	github.com/yylego/kratos-examples/demo2kratos v0.0.3
 	github.com/yylego/osexistpath v0.0.0
-	github.com/yylego/runpath v0.0.4
+	github.com/yylego/runpath v0.0.7
 )
 
 require (

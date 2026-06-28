@@ -2,9 +2,9 @@ package biz
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/brianvoe/gofakeit/v7"
-	"github.com/go-kratos/kratos/v2/log"
 	"github.com/yylego/kratos-ebz/ebzkratos"
 	pb "github.com/yylego/kratos-examples/demo1kratos/api/student"
 	"github.com/yylego/kratos-examples/demo1kratos/internal/data"
@@ -20,11 +20,11 @@ type Student struct {
 
 type StudentUsecase struct {
 	data *data.Data
-	log  *log.Helper
+	slog *slog.Logger
 }
 
-func NewStudentUsecase(data *data.Data, logger log.Logger) *StudentUsecase {
-	return &StudentUsecase{data: data, log: log.NewHelper(logger)}
+func NewStudentUsecase(data *data.Data, logger *slog.Logger) *StudentUsecase {
+	return &StudentUsecase{data: data, slog: logger}
 }
 
 func (uc *StudentUsecase) CreateStudent(ctx context.Context, s *Student) (*Student, *ebzkratos.Ebz) {

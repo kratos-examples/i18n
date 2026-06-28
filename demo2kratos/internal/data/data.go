@@ -1,7 +1,8 @@
 package data
 
 import (
-	"github.com/go-kratos/kratos/v2/log"
+	"log/slog"
+
 	"github.com/google/wire"
 	"github.com/yylego/kratos-examples/demo2kratos/internal/conf"
 	"github.com/yylego/must"
@@ -16,11 +17,11 @@ type Data struct {
 	db *gorm.DB
 }
 
-func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
+func NewData(c *conf.Data, logger *slog.Logger) (*Data, func(), error) {
 	must.Same(c.Database.Driver, "sqlite3")
 	db := rese.P1(gorm.Open(sqlite.Open(c.Database.Source), &gorm.Config{}))
 	cleanup := func() {
-		log.NewHelper(logger).Info("closing the data resources")
+		logger.Info("closing the data resources")
 		_ = rese.P1(db.DB()).Close()
 	}
 	return &Data{db: db}, cleanup, nil
