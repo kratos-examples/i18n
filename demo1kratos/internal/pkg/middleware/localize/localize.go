@@ -3,8 +3,8 @@ package localize
 import (
 	"context"
 
-	"github.com/go-kratos/kratos/v2/middleware"
-	"github.com/go-kratos/kratos/v2/transport"
+	"github.com/go-kratos/kratos/v3/middleware"
+	"github.com/go-kratos/kratos/v3/transport"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize/i18n_message"
 	"github.com/yylego/tern/zerotern"

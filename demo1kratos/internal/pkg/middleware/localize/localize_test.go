@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/go-kratos/kratos/v2/middleware"
+	"github.com/go-kratos/kratos/v3/middleware"
 	"github.com/stretchr/testify/require"
 	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize"
 	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize/i18n_message"

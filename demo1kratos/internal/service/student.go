@@ -20,7 +20,14 @@ func NewStudentService(uc *biz.StudentUsecase) *StudentService {
 }
 
 func (s *StudentService) CreateStudent(ctx context.Context, req *pb.CreateStudentRequest) (*pb.CreateStudentReply, error) {
-	v, ebz := s.uc.CreateStudent(ctx, nil)
+	if req.Name == "" {
+		return nil, pb.ErrorBadParam("NAME IS REQUIRED")
+	}
+	v, ebz := s.uc.CreateStudent(ctx, &biz.Student{
+		Name:      req.Name,
+		Age:       req.Age,
+		ClassName: req.ClassName,
+	})
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -33,7 +40,18 @@ func (s *StudentService) CreateStudent(ctx context.Context, req *pb.CreateStuden
 }
 
 func (s *StudentService) UpdateStudent(ctx context.Context, req *pb.UpdateStudentRequest) (*pb.UpdateStudentReply, error) {
-	v, ebz := s.uc.UpdateStudent(ctx, nil)
+	if req.Id <= 0 {
+		return nil, pb.ErrorBadParam("ID IS REQUIRED")
+	}
+	if req.Name == "" {
+		return nil, pb.ErrorBadParam("NAME IS REQUIRED")
+	}
+	v, ebz := s.uc.UpdateStudent(ctx, &biz.Student{
+		ID:        req.Id,
+		Name:      req.Name,
+		Age:       req.Age,
+		ClassName: req.ClassName,
+	})
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -41,6 +59,9 @@ func (s *StudentService) UpdateStudent(ctx context.Context, req *pb.UpdateStuden
 }
 
 func (s *StudentService) DeleteStudent(ctx context.Context, req *pb.DeleteStudentRequest) (*pb.DeleteStudentReply, error) {
+	if req.Id <= 0 {
+		return nil, pb.ErrorBadParam("ID IS REQUIRED")
+	}
 	if ebz := s.uc.DeleteStudent(ctx, req.Id); ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -48,6 +69,9 @@ func (s *StudentService) DeleteStudent(ctx context.Context, req *pb.DeleteStuden
 }
 
 func (s *StudentService) GetStudent(ctx context.Context, req *pb.GetStudentRequest) (*pb.GetStudentReply, error) {
+	if req.Id <= 0 {
+		return nil, pb.ErrorBadParam("ID IS REQUIRED")
+	}
 	v, ebz := s.uc.GetStudent(ctx, req.Id)
 	if ebz != nil {
 		return nil, ebz.Erk

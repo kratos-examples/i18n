@@ -215,8 +215,8 @@ Code differences compared to source project.
 +import (
 +	"context"
 +
-+	"github.com/go-kratos/kratos/v2/middleware"
-+	"github.com/go-kratos/kratos/v2/transport"
++	"github.com/go-kratos/kratos/v3/middleware"
++	"github.com/go-kratos/kratos/v3/transport"
 +	"github.com/nicksnyder/go-i18n/v2/i18n"
 +	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize/i18n_message"
 +	"github.com/yylego/tern/zerotern"
@@ -261,7 +261,7 @@ Code differences compared to source project.
 +	"context"
 +	"testing"
 +
-+	"github.com/go-kratos/kratos/v2/middleware"
++	"github.com/go-kratos/kratos/v3/middleware"
 +	"github.com/stretchr/testify/require"
 +	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize"
 +	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize/i18n_message"
@@ -297,15 +297,15 @@ Code differences compared to source project.
 ## internal/server/http.go (+2 -0)
 
 ```diff
-@@ -6,6 +6,7 @@
- 	"github.com/go-kratos/kratos/v2/transport/http"
+@@ -7,6 +7,7 @@
+ 	"github.com/go-kratos/kratos/v3/transport/http"
  	pb "github.com/yylego/kratos-examples/demo1kratos/api/student"
  	"github.com/yylego/kratos-examples/demo1kratos/internal/conf"
 +	"github.com/yylego/kratos-examples/demo1kratos/internal/pkg/middleware/localize"
  	"github.com/yylego/kratos-examples/demo1kratos/internal/service"
  )
  
-@@ -13,6 +14,7 @@
+@@ -14,6 +15,7 @@
  	var opts = []http.ServerOption{
  		http.Middleware(
  			recovery.Recovery(),
@@ -327,7 +327,7 @@ Code differences compared to source project.
  )
  
  type StudentService struct {
-@@ -22,7 +24,12 @@
+@@ -29,7 +31,12 @@
  	if ebz != nil {
  		return nil, ebz.Erk
  	}
